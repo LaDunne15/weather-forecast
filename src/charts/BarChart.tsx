@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTemperature, getHumidity, getWind } from "../service/getData";
+import { getTemperature, getHumidity, getWind, getChance_of_rain } from "../service/getData";
 import { BarChart as BC, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
 
 function BarChart(props: any) {
@@ -17,6 +17,9 @@ function BarChart(props: any) {
                 break;
             case "wind":
                 setChartData(getWind(props.data));
+                break;
+            case "chance_of_rain":
+                setChartData(getChance_of_rain(props.data));
                 break;
             default:
                 break;

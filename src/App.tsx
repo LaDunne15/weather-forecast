@@ -4,6 +4,7 @@ import BarChart from './charts/BarChart';
 import MainForecast from './components/MainForecast';
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from './intefaces/AppState';
+import LocationData from './components/Location';
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoadiong] = useState(false);
-  const [location, setLocation] = useState("brusnitsa");
+  const [location, setLocation] = useState(areas.size !== 0 ? Array.from(areas)[0] : "kiev");
+  const [input, setInput] = useState("");
   const [focusDay, setFocusDay] = useState({
         day: {
           condition: {
@@ -58,23 +60,28 @@ function App() {
         hour: [],
         date: ""
       }]
+    },
+    location: {
+      name: "",
+      region: "",
+      country: "",
+      lat: 0,
+      lon: 0
     }
   });
 
-  const deleteArea = (name: string) => {
-    dispatch({type: 'DELETE_AREA', payload: name})
-  }
+  const [isError, setIsError] = useState(false);
 
-  const loadData = () => {
-    fetchData(location);
+  const deleteArea = (name: string) => {
+    dispatch({ type: 'DELETE_AREA', payload: name });
   }
 
   const changeArea = (name: string) => {
     setLocation(name);
-    fetchData(name);
   }
 
   const fetchData = async (areaName: string) => {
+    setIsError(false);
     try {
       setIsLoadiong(true);
       const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?q=${areaName}&lang=${lang}&days=${days}&key=${API_KEY}`);
@@ -85,34 +92,33 @@ function App() {
       console.log(json);
       setIsLoadiong(false);
     } catch (error) {
-      console.error('Помилка:',error)
+      console.log("ПОМИЛКА СПРАЦЮВАЛА")
+      setIsError(true);
     }
   }
 
   useEffect(() => {
-    console.log("Нові дані",focusDay);
-  }, [focusDay]);
-  
-  if (isLoading) {
-    return <div>
-      Завантаження...
-    </div>
-  }
+    if (location !== "")
+    {
+      fetchData(location);
+    }
+  }, [location]);
 
   return (
     <div>
-      <input type="text" onChange={(e)=>setLocation(e.target.value)} value={location}/>
-      <input type="button" value="Запит" onClick={() => loadData()} />
+      <input type="search" onChange={(e)=>setInput(e.target.value)}/>
+      <input type="button" value="Запит" onClick={() => setLocation(input)} />
         {
           Array.from(areas).map((i,index) => (
-            <div className={location===i?"border":""} key={index} onClick={() => changeArea(i)}>
-              {i}
+            <div key={index}>
+              <label className={location === i ? "border" : ""} onClick={() => changeArea(i)}>{i}</label>
               <input type="button" value="Видалити" onClick={() => deleteArea(i)}/>
             </div>
           ))
         }    
-      {!isLoading && (
+      {!isLoading && !isError && (
         <div>
+          <LocationData data={data.location}/>
           <MainForecast data={data.current} />
           <div>
             <h3>Прогноз на 3 дня:</h3>
@@ -127,7 +133,7 @@ function App() {
             }
             <div>
               {
-                ["temperature", "humidity", "wind"].map((i, index) => (
+                ["temperature","wind", "chance_of_rain"].map((i, index) => (
                   <div key={index} onClick={() => setFocusMode(i)} className={i === focusMode ? "border" : ""}>{i}</div>
               ))}
             </div>
@@ -135,6 +141,21 @@ function App() {
           </div>
         </div>
       )}
+      {
+        isError && (
+          <div>
+            Помилка!
+            Неправильно введене місто
+          </div>
+        )
+      }
+      {
+        !isError && isLoading && (
+          <div>
+            Обробка запиту...
+          </div>
+        )
+      }
     </div>
   );
 }
