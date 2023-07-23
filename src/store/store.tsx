@@ -1,14 +1,16 @@
 import { Action, createStore } from "redux";
 import AppState from "../intefaces/AppState";
-import { addArea, deleteArea, getAreas } from "../service/localStarage";
+import { addArea, deleteArea, getAreas } from "../service/localStorage";
 
 const initialState: AppState = {
-    areas : getAreas()
+    areas: getAreas(),
+    location: Array.from(getAreas())[0]
 }
 
 enum ActionTypes {
     ADD_AREA = 'ADD_AREA',
-    DELETE_AREA = 'DELETE_AREA'
+    DELETE_AREA = 'DELETE_AREA',
+    FOCUS_AREA = 'FOCUS_AREA'
 }
 
 interface AddAreaAction {
@@ -21,8 +23,13 @@ interface DeleteAreaAction {
     payload:string
 }
 
+interface FocusAreaAction {
+    type: ActionTypes.FOCUS_AREA,
+    payload:string
+}
 
-const rootReduser = (state = initialState, action: AddAreaAction | DeleteAreaAction) : AppState => {
+
+const rootReduser = (state = initialState, action: AddAreaAction | DeleteAreaAction | FocusAreaAction) : AppState => {
     switch (action.type) {
         case ActionTypes.ADD_AREA:
             return {
@@ -34,6 +41,11 @@ const rootReduser = (state = initialState, action: AddAreaAction | DeleteAreaAct
                 ...state,
                 areas: deleteArea(action.payload)
             };
+        case ActionTypes.FOCUS_AREA:
+            return {
+                ...state,
+                location: action.payload
+            }
         default:
             return state;
     }
