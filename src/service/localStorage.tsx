@@ -1,7 +1,11 @@
-export const addArea = (name: string) : Set<string> => {
+const capitalize = (inputString: string): string => {
+    return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+};
+
+export const addArea = (name: string): Set<string> => {
     let areas: Set<string> = getAreas();
     let areas_arr = Array.from(areas);
-    areas_arr.unshift(name);
+    areas_arr.unshift(capitalize(name));
     areas = new Set(areas_arr);
     localStorage.setItem('Areas',JSON.stringify(Array.from(areas)));
     return getAreas();

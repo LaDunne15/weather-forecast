@@ -1,4 +1,4 @@
-import { Action, createStore } from "redux";
+import { createStore } from "redux";
 import AppState from "../intefaces/AppState";
 import { addArea, deleteArea, getAreas } from "../service/localStorage";
 

@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import "./styles.css";
+import { useEffect, useState } from 'react';
+import "./styles/styles.css";
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from './intefaces/AppState';
 import Location from './components/Location';
-import Areas from './components/Areas';
+import Areas from './components/areas/Areas';
 import Forecast from './components/Forecast';
 import Current from './components/Current';
 
 function App() {
-
-  const API_KEY = '22bef7219d7b45ba923124205231907';
-  const lang = 'uk';
-  const days = 3;
 
   const location = useSelector((state: AppState) => state.location);
   const dispatch = useDispatch();
@@ -32,12 +28,17 @@ function App() {
     dispatch({ type: 'FOCUS_AREA', payload: name });
   }
 
-  const fetchData = (areaName: string) => {
+  useEffect(() => {
+    const API_KEY =`${process.env.REACT_APP_API_KEY}`;
+    const lang = `${process.env.REACT_APP_LANG}`;
+    const days = `${process.env.REACT_APP_DAYS}`;
+    const fetchData = (areaName: string) => {
     setIsLoading(true);
     fetch(`https://api.weatherapi.com/v1/forecast.json?q=${areaName}&lang=${lang}&days=${days}&key=${API_KEY}`)
     .then((res) => {
       setIsError(false);
       if (res.ok) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
         dispatch({ type: 'ADD_AREA', payload: location });
         return res.json();
       }
@@ -56,17 +57,25 @@ function App() {
     });
   }
 
-  useEffect( () => {
     if (location) fetchData(location);
+    
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (
     <>
-      <header>Як там внизу погодка?</header>
+      <header>
+        <span>
+          Як там внизу погодка?
+        </span>
+      </header>
       <nav>
         <form>
-          <input type="search" onChange={(e)=>setInput(e.target.value)}/>
-          <input type="button" value="Запит" onClick={() => changeArea(input)} />
+          <span>Введіть бажаний пункт</span>
+          <div>
+            <input type="search" onChange={(e)=>setInput(e.target.value)}/>
+            <input type="button" value="Запит" onClick={() => changeArea(input)} />
+          </div>
         </form>
         <Areas/>
       </nav>

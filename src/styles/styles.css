@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@300;400;500;600&display=swap');
+
+
+.border {
+    border: 1px solid red;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Oswald', sans-serif;
+}
+
+header {
+    background-color: black;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+nav {
+    padding: 10px;
+}
+
+nav form div {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+nav form div input[type=button] {
+    width: 100px;
+    background-color: black;
+    color: white;
+}
+
+nav form div input[type=search] {
+    flex: 1;
+}
+
+main {
+    padding: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    
+}

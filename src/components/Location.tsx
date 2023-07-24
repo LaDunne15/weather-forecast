@@ -18,7 +18,7 @@ function Location(data: any) {
     return (
         <div>
             {location.country} - {location.region} - {location.name} | {location.localtime} | {location.lat} {location.lon}
-            <a target="_blank" href={`https://www.google.com/maps?q=${location.lat},${location.lon}`}>Перейти</a>
+            <a target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps?q=${location.lat},${location.lon}`}>Перейти</a>
         </div>
     )
 }
