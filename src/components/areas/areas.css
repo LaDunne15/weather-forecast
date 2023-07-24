@@ -1,10 +1,11 @@
 .areas {
     display: block;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
+
 .area {
-    display: inline;
+    display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
     padding: 3px;
@@ -21,5 +22,5 @@
     background-color: black;
     color: white;
     border: none;
-    
+    margin: auto 0;
 }

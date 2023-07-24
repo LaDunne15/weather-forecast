@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import "./styles/styles.css";
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from './intefaces/AppState';
-import Location from './components/Location';
+import Location from './components/location/Location';
 import Areas from './components/areas/Areas';
 import Forecast from './components/Forecast';
 import Current from './components/Current';
+const gif = require('./static/_location.gif');
 
 function App() {
 
@@ -65,14 +66,13 @@ function App() {
   return (
     <>
       <header>
-        <span>
-          Як там внизу погодка?
-        </span>
+          Як там внизу <span className='logo'>погодка</span>?
       </header>
       <nav>
         <form>
-          <span>Введіть бажаний пункт</span>
+          <span>Введіть бажаний пункт (англійською)</span>
           <div>
+            <img className='location_gif' src={gif} alt="git_location"/>
             <input type="search" onChange={(e)=>setInput(e.target.value)}/>
             <input type="button" value="Запит" onClick={() => changeArea(input)} />
           </div>

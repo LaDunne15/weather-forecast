@@ -29,7 +29,7 @@ function Areas() {
                         <label onClick={() => changeArea(i)}>{i}</label>
                         {
                             location.toLowerCase() === i.toLowerCase() && (
-                                <input className="close-area" type="button" value="x" onClick={() => deleteArea(i)}/>
+                                <input className="close-area" type="button" value="X" onClick={() => deleteArea(i)}/>
                             )
                         }
                     </div>

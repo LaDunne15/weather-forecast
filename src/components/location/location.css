@@ -1,0 +1,35 @@
+.location {
+    border: 1px dashed black;
+    display: flex;
+}
+
+.location .address {
+    flex: 1;
+}
+
+.location-name {
+    font-size: xx-large;
+    display: inline-block;
+    background-color: black;
+    color: white;
+}
+
+.location-reload {
+    font-size: x-small;
+    margin-left: 10px;
+}
+
+.location .coordinates {
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.coordinates {
+    text-align:end;
+}
+
+.coordinates-link:visited, .coordinates-link, .coordinates-link:hover {
+    color: red;
+}

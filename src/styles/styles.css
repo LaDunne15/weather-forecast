@@ -22,6 +22,10 @@ nav {
     padding: 10px;
 }
 
+nav form .location_gif {
+    width: 30px;
+}
+
 nav form div {
     display: flex;
     padding-top: 10px;
@@ -32,10 +36,17 @@ nav form div input[type=button] {
     width: 100px;
     background-color: black;
     color: white;
+    border: none;
+}
+
+.logo {
+    background-color: white;
+    color: black;
 }
 
 nav form div input[type=search] {
     flex: 1;
+    margin-right: 3px;
 }
 
 main {

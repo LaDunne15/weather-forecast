@@ -39,7 +39,8 @@ const rootReduser = (state = initialState, action: AddAreaAction | DeleteAreaAct
         case ActionTypes.DELETE_AREA:
             return {
                 ...state,
-                areas: deleteArea(action.payload)
+                areas: deleteArea(action.payload),
+                location: Array.from(getAreas())[0]
             };
         case ActionTypes.FOCUS_AREA:
             return {
