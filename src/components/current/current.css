@@ -1,0 +1,74 @@
+.current-content {
+    background-color: black;
+    color: white;
+    margin-top: 10px;
+}
+
+.first-frame,.second-frame {
+    flex: 1;
+    display: flex;
+    background-size: 150%;
+}
+
+.first-frame {
+    background-image: linear-gradient(to right, rgba(245, 246, 252, 0), rgba(117, 19, 93, 1)),
+    url('../../static/amazing-beautiful-sky-with-clouds.jpg');
+}
+
+.first-frame .condition {
+    font-size: x-large;
+}
+
+.first-frame .temperature {
+    font-size: xx-large;
+}
+
+.first-frame .icon {
+    aspect-ratio: 1/1;
+    width: 80px;
+}
+
+.first-frame div{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: end;
+}
+
+.second-frame
+{
+    background-image: linear-gradient(to left, rgba(245, 246, 252, 0), rgba(117, 19, 93, 1)),
+    url('../../static/glass-window-covered-raindrops-with-lights-blurry-background.jpg');
+}
+
+.second-frame div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.second-frame span {
+    font-size: small;
+}
+
+.left-half,.right-half {
+    display: flex;
+    width: 200%;
+    overflow-x: clip;
+}
+
+.left-half {
+    transform: translate(0%);
+    transition: 0.5s;
+}
+
+.right-half {
+    transform: translateX(-50%);
+    transition: 0.5s;
+}
+
+.toggle {
+    border: none;
+    position: relative;
+}

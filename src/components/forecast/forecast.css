@@ -1,0 +1,17 @@
+.forecast {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+}
+
+.forecast .days {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.forecast .measures {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}

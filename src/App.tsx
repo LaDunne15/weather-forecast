@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AppState from './intefaces/AppState';
 import Location from './components/location/Location';
 import Areas from './components/areas/Areas';
-import Forecast from './components/Forecast';
-import Current from './components/Current';
+import Forecast from './components/forecast/Forecast';
+import Current from './components/current/Current';
 const gif = require('./static/_location.gif');
 
 function App() {
