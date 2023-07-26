@@ -103,7 +103,10 @@ function App() {
           </div>
         )
       }
-      <footer>@Vlad</footer>
+      <footer>
+        osh
+        2023
+      </footer>
     </>
   );
 }

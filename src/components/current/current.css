@@ -1,6 +1,7 @@
 .current-content {
     background-color: black;
     color: white;
+    overflow-x: hidden;
     margin-top: 10px;
 }
 
@@ -55,7 +56,6 @@
 .left-half,.right-half {
     display: flex;
     width: 200%;
-    overflow-x: clip;
 }
 
 .left-half {

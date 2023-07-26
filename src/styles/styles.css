@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@300;400;500;600&display=swap');
 
 
+
 .border {
     border: 1px solid red;
 }
@@ -8,6 +9,7 @@
 body {
     font-family: 'Montserrat', sans-serif;
     font-family: 'Oswald', sans-serif;
+    width: 100vw;
 }
 
 header {
@@ -55,4 +57,12 @@ main {
 
 @media screen and (max-width: 600px) {
     
+}
+
+footer {
+    margin-top: 15px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
 }

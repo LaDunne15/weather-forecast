@@ -20,21 +20,18 @@ function Current(data: any) {
     });
 
     const [toggleFrame,setToggleFrame] = useState(true);
-    const [focusClassName,setFocusClassName] = useState("left-half");
+    const focusClassName = toggleFrame?"left-half":"right-half";
 
     const changeFrame = () => {
-        setToggleFrame(!toggleFrame);
+      console.log("викликано метод");
+      setToggleFrame(!toggleFrame);
     }
 
-    useEffect(()=> {
-        if(toggleFrame){
-            setFocusClassName("left-half");
-        }
-            else
-        {
-            setFocusClassName("right-half")
-        }
-    }, [toggleFrame]);
+    useEffect(() => {
+      const toggleState = () => setToggleFrame((prevState) => !prevState);
+      const interval = setInterval(toggleState, 7000);
+      return () => clearInterval(interval);
+    }, []);
 
     const decodeWind = (direction: string): string => {
         switch (direction) {
@@ -77,7 +74,7 @@ function Current(data: any) {
 
     useEffect(() => {
         setCurrent(data.current);
-    },[data])
+    },[data]);
 
     return (
         <div className="current-content">

@@ -4,14 +4,60 @@
     flex-direction: column;
 }
 
-.forecast .days {
+.days {
     display: flex;
     flex-direction: row;
+    flex: 1;
     justify-content: space-around;
+    margin-bottom: 10px;
 }
 
-.forecast .measures {
+.focused_day, .day {
+    border: 1px solid rgba(255, 255, 255, 0);
+    flex: 1 1 0;
+    width: 0;
+    margin: 5px;
+    text-align: center;
+}
+
+.focused_day {
+    border: 1px dashed black;
+}
+
+.focused_day span {
+    background-color: black;
+    color: white;
+}
+
+.max-min-temperature {
+    display: flex;
+    flex-direction: column;
+}
+
+.max-min-temperature div {
+    margin: 4px;
+    display: block;
+}
+
+.params {
     display: flex;
     flex-direction: row;
     justify-content:space-evenly;
+    text-align: center;
+}
+
+.focused_param span{
+    background-color: black;
+    color: white;
+}
+
+.param:hover {
+    transition: 0.5s;
+    background-color: red;
+    color: white;
+}
+
+.focused_param {
+    background-color: black;
+    color: white;
 }
