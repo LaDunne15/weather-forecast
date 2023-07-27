@@ -72,11 +72,9 @@ function App() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            console.log(position.coords.latitude);
-            console.log(position.coords.longitude);
             const string_coords : string = position.coords.latitude.toString().substring(0,5) +" "+ position.coords.longitude.toString().substring(0,5)
-            //dispatch({ type: 'ADD_AREA', payload: string_coords });
             fetchData(string_coords);
+            dispatch({ type: 'FOCUS_AREA', payload: string_coords });
           },
           (error) => {
             console.error('Error getting user location:', error);
@@ -108,10 +106,14 @@ function App() {
       </nav>
       <main>
         {!isLoading && !isError && (
-          <div>
-              <Location location={data.location}/>
-              <Current current={data.current} />
-              <Forecast forecast={data.forecast.forecastday}/>        
+          <div className='main_content'>
+              <div className='left_block'>
+                <Location location={data.location}/>
+                <Current current={data.current} />
+              </div>
+              <div className='right_block'>
+                <Forecast forecast={data.forecast.forecastday}/>        
+              </div>
           </div>
         )}
       </main>
@@ -129,7 +131,7 @@ function App() {
             Обробка запиту...
           </div>
         )
-      }
+      } 
       <footer>
         osh
         2023

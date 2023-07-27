@@ -29,7 +29,7 @@ function BarChart(props: any) {
     
    return (
     <ResponsiveContainer width="100%" height={150}>
-        <LineChart width={300} height={100} data={chartData}>
+        <LineChart data={chartData}>
             <Line type="monotone" dataKey="value" stroke="#8884d8" strokeWidth={2} />
             <XAxis dataKey="time">
                 <Label value={props.type} offset={0} position="insideBottomLeft" />

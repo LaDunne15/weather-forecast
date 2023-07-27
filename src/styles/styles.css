@@ -10,13 +10,14 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-family: 'Oswald', sans-serif;
     width: 100vw;
+    overflow-x: hidden;
 }
 
 header {
     background-color: black;
     color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-align: center;
 }
 
@@ -55,14 +56,34 @@ main {
     padding: 10px;
 }
 
-@media screen and (max-width: 600px) {
-    
+@media screen and (min-width: 700px) {
+    .main_content {
+        display: flex;
+    }
+
+    .left_block, .right_block {
+        flex: 1;
+    }
+
+    main, nav {
+        display: block;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .main_content {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 footer {
     margin-top: 15px;
     background-color: black;
     color: white;
+    min-height: 300px;
     text-align: center;
     padding: 20px;
 }
