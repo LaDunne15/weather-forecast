@@ -3,13 +3,13 @@
     padding-top: 15px;
 }
 
-
 .area {
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
     padding: 3px;
     margin-right: 5px;
+    margin-top: 5px;
 }
 
 .focused {
@@ -23,4 +23,5 @@
     color: white;
     border: none;
     margin: auto 0;
+    margin-left: 5px;
 }

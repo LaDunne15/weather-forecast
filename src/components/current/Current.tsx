@@ -23,7 +23,6 @@ function Current(data: any) {
     const focusClassName = toggleFrame?"left-half":"right-half";
 
     const changeFrame = () => {
-      console.log("викликано метод");
       setToggleFrame(!toggleFrame);
     }
 

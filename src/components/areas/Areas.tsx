@@ -25,11 +25,11 @@ function Areas() {
             <div className="areas">
             {
                 Array.from(areas).map((i,index) => (
-                    <div key={index} className={location.toLowerCase() === i.toLowerCase() ? active_area : normal_area}>
+                    <div key={index} className={location === i? active_area : normal_area}>
                         <label onClick={() => changeArea(i)}>{i}</label>
                         {
-                            location.toLowerCase() === i.toLowerCase() && (
-                                <input className="close-area" type="button" value="X" onClick={() => deleteArea(i)}/>
+                            location === i && (
+                                <span className="close-area" onClick={() => deleteArea(i)}>X</span>
                             )
                         }
                     </div>

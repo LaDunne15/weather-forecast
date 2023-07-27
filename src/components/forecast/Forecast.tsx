@@ -17,7 +17,7 @@ function Forecast(data: any) {
         hour: [],
         date: ""
     }])
-    const [focusMode, setFocusMode] = useState("temperature");
+    const [focusMode, setFocusMode] = useState("температура");
 
     function formatDate(dateString: string): string {
         const [, month, day] = dateString.split('-');
@@ -50,7 +50,9 @@ function Forecast(data: any) {
             {
                 forecast.map((i, index) => (
                     <div key={index} onClick={()=>setFocusDay(index)} className={index===focusDay?"focused_day":"day"}>                        
-                        <span className="date">{formatDate(i.date)}</span>
+                        <div>
+                            <span className="date">{formatDate(i.date)}</span>
+                        </div>
                         <img src={i.day.condition.icon} alt={i.day.condition.text} />
                         <div className="max-min-temperature">
                             <div>макс: <span>{i.day.maxtemp_c}°C</span></div>
@@ -63,7 +65,7 @@ function Forecast(data: any) {
             <BarChart data={forecast[focusDay].hour} type={focusMode} />
             <div className="params">
             {
-                ["temperature","chance_of_rain","wind"].map((i, index) => (
+                ["температура","ймовірність опадів","вітер"].map((i, index) => (
                     <span key={index} onClick={() => setFocusMode(i)} className={i === focusMode ? "focused_param" : "param"}>{i}</span>
                 ))
             }

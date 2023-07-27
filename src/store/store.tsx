@@ -4,7 +4,7 @@ import { addArea, deleteArea, getAreas } from "../service/localStorage";
 
 const initialState: AppState = {
     areas: getAreas(),
-    location: Array.from(getAreas())[0]
+    location: getAreas().size?Array.from(getAreas())[0]:""
 }
 
 enum ActionTypes {

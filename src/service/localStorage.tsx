@@ -19,5 +19,5 @@ export const deleteArea = (name: string) : Set<string> => {
 export const getAreas = () : Set<string> => {
     const areas : any = localStorage.getItem('Areas');
     const areas_arr: string [] = areas?JSON.parse(areas):[];
-    return (areas_arr.length)? new Set(areas_arr) : new Set(['Kiev']);
+    return (areas_arr.length)? new Set(areas_arr) : new Set();
 }

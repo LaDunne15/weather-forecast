@@ -29,19 +29,23 @@ function App() {
     dispatch({ type: 'FOCUS_AREA', payload: name });
   }
 
-  useEffect(() => {
-    const API_KEY =`${process.env.REACT_APP_API_KEY}`;
-    const lang = `${process.env.REACT_APP_LANG}`;
-    const days = `${process.env.REACT_APP_DAYS}`;
-    const fetchData = (areaName: string) => {
+  
+  const API_KEY =`${process.env.REACT_APP_API_KEY}`;
+  const lang = `${process.env.REACT_APP_LANG}`;
+  const days = `${process.env.REACT_APP_DAYS}`;
+
+  const fetchData = (areaName: string) => {
     setIsLoading(true);
     fetch(`https://api.weatherapi.com/v1/forecast.json?q=${areaName}&lang=${lang}&days=${days}&key=${API_KEY}`)
     .then((res) => {
       setIsError(false);
       if (res.ok) {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-        dispatch({ type: 'ADD_AREA', payload: location });
-        return res.json();
+        const data = res.json();
+        data.then(data=>{
+          const locationName = data.location.name;
+          dispatch({ type: 'ADD_AREA', payload: locationName });
+        })
+        return data;
       }
       else
       {
@@ -58,8 +62,30 @@ function App() {
     });
   }
 
-    if (location) fetchData(location);
+  useEffect(() => {
     
+
+    if (location)
+    {fetchData(location)} 
+    else 
+    {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
+            const string_coords : string = position.coords.latitude.toString().substring(0,5) +" "+ position.coords.longitude.toString().substring(0,5)
+            //dispatch({ type: 'ADD_AREA', payload: string_coords });
+            fetchData(string_coords);
+          },
+          (error) => {
+            console.error('Error getting user location:', error);
+          }
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+      }
+    };
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
@@ -70,7 +96,7 @@ function App() {
       </header>
       <nav>
         <form>
-          <span>Введіть бажаний пункт (англійською)</span>
+          <span>Введіть назву пункту англійською або його координати:</span>
           <div>
             <img className='location_gif' src={gif} alt="git_location"/>
             <input type="search" onChange={(e)=>setInput(e.target.value)}/>

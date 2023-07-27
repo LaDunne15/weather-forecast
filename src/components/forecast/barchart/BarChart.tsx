@@ -9,16 +9,16 @@ function BarChart(props: any) {
 
     useEffect(() => {
         switch (props.type) {
-            case "temperature":
+            case "температура":
                 setChartData(getTemperature(props.data));
                 break;
-            case "humidity":
+            case "вологість":
                 setChartData(getHumidity(props.data));
                 break;
-            case "wind":
+            case "вітер":
                 setChartData(getWind(props.data));
                 break;
-            case "chance_of_rain":
+            case "ймовірність опадів":
                 setChartData(getChance_of_rain(props.data));
                 break;
             default:
