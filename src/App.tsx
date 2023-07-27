@@ -84,6 +84,7 @@ function App() {
         );
       } else {
         console.error('Geolocation is not supported by this browser.');
+        fetchData("Kiev");
       }
     };
       // eslint-disable-next-line react-hooks/exhaustive-deps
