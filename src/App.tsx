@@ -7,6 +7,7 @@ import Areas from './components/areas/Areas';
 import Forecast from './components/forecast/Forecast';
 import Current from './components/current/Current';
 const gif = require('./static/_location.gif');
+const telegram_icon = require('./static/icons8-telegram-50.png');
 
 function App() {
 
@@ -133,8 +134,12 @@ function App() {
         )
       } 
       <footer>
-        osh
-        2023
+        <div>
+          <a href="https://t.me/magenta_human">
+            <img src={telegram_icon} alt="magenta_human" /><span>©Osh</span>
+          </a>
+        </div>
+        <p>2023</p>
       </footer>
     </>
   );

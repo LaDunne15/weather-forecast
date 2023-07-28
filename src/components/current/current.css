@@ -11,6 +11,12 @@
     background-size: 150%;
 }
 
+.first-frame .icon {
+    margin: 0 auto;
+    max-height: 64px;
+    aspect-ratio: 1/1;
+}
+
 .first-frame {
     background-image: linear-gradient(to right, rgba(245, 246, 252, 0), rgba(117, 19, 93, 1)),
     url('../../static/amazing-beautiful-sky-with-clouds.jpg');
@@ -22,11 +28,6 @@
 
 .first-frame .temperature {
     font-size: xx-large;
-}
-
-.first-frame .icon {
-    aspect-ratio: 1/1;
-    width: 80px;
 }
 
 .first-frame div{

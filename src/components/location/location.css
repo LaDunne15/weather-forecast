@@ -7,6 +7,10 @@
     flex: 1;
 }
 
+.address {
+    align-items: center;
+}
+
 .location-name {
     font-size: xx-large;
     display: inline-block;

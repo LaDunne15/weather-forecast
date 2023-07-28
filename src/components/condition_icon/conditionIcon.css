@@ -1,0 +1,9 @@
+img {
+    margin: 0 auto;
+    max-height: 64px;
+    aspect-ratio: 1/1;
+}
+
+.code {
+    flex: 64px;
+}

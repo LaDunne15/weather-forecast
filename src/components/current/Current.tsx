@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./current.css";
+import ConditionIcon from "../condition_icon/ConditionIcon";
 
 function Current(data: any) {
 
@@ -79,7 +80,7 @@ function Current(data: any) {
         <div className="current-content">
             <div className={focusClassName}>
                 <div onClick={changeFrame} className="first-frame">
-                    <img className="icon" src={current.condition.icon} alt={current.condition.text} />
+                    <ConditionIcon condition={current.condition}/>
                     <div>
                         <span className="condition">{current.condition.text}</span>
                         <span className="temperature">{current.temp_c}°C</span>

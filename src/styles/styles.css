@@ -52,6 +52,7 @@ nav form div input[type=search] {
     margin-right: 3px;
 }
 
+
 main {
     padding: 10px;
 }
@@ -63,6 +64,20 @@ main {
 
     .left_block, .right_block {
         flex: 1;
+        margin: 5px;
+    }
+
+    .left_block {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .location {
+        flex: 1;
+    }
+
+    .current-content {
+        flex: 2;
     }
 
     main, nav {
@@ -83,7 +98,28 @@ footer {
     margin-top: 15px;
     background-color: black;
     color: white;
-    min-height: 300px;
+    min-height: 200px;
     text-align: center;
     padding: 20px;
+}
+
+footer div {
+    margin-bottom: 10px;
+}
+
+footer a * {
+    margin-left: 20px;
+}
+
+footer a:visited {
+    color: white;
+}
+
+footer img {
+    aspect-ratio: 1/1;
+    width: 20px;
+}
+
+footer span {
+    vertical-align:text-top
 }
