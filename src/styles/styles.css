@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@300;400;500;600&display=swap');
 
-
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
 .border {
     border: 1px solid red;
@@ -55,7 +59,7 @@ nav form div input[type=search] {
 
 main {
     padding: 10px;
-    min-height: 100vh;
+    flex: 1;
 }
 
 @media screen and (min-width: 700px) {

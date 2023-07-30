@@ -43,16 +43,17 @@ function App() {
 
   const fetchData = (areaName: string) => {
     setIsLoading(true);
+    setIsError(false);
     fetch(`https://api.weatherapi.com/v1/forecast.json?q=${areaName}&lang=${lang}&days=${days}&key=${API_KEY}`)
     .then((res) => {
-      setIsLoading(false);
       const data= res.json();
       if (res.ok) {
-        setIsError(false);
         data.then(data=>{
           const locationName = data.location.name;
+          setData(data);
           dispatch({ type: 'ADD_AREA', payload: locationName });
           dispatch({ type: 'FOCUS_AREA', payload: locationName });
+          setIsLoading(false);
         })
         return data;
       }
@@ -61,10 +62,8 @@ function App() {
         data.then(data=>{
           setErrorData(data);
         });
+        setIsError(true);
       }
-    })
-    .then((responseJson) => {
-      setData(responseJson);
     })
     .catch((error) => {
       setIsError(true);
@@ -111,7 +110,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className='app'>
       <header>
           Як там внизу <span className='logo'>погодка</span>?
       </header>
@@ -153,7 +152,7 @@ function App() {
         </div>
         <p>2023</p>
       </footer>
-    </>
+    </div>
   );
 }
 
