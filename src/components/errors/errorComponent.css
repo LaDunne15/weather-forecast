@@ -1,0 +1,20 @@
+.error {
+    border: 1px solid black;
+}
+
+.error-label {
+    display: block;
+    text-align: center;
+    background-color: red;
+}
+
+.error-code {
+    display: block;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.error-message {
+    display: block;
+    padding: 10px;
+}

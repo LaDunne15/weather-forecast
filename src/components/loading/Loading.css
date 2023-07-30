@@ -1,0 +1,13 @@
+.loading {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.loading-gif {
+    padding: 50px;
+}
+
+.loading-message {
+    font-size: large;
+}

@@ -6,6 +6,8 @@ import Location from './components/location/Location';
 import Areas from './components/areas/Areas';
 import Forecast from './components/forecast/Forecast';
 import Current from './components/current/Current';
+import ErrorComponent from './components/errors/ErrorComponent';
+import Loading from './components/loading/Loading';
 const gif = require('./static/_location.gif');
 const telegram_icon = require('./static/icons8-telegram-50.png');
 
@@ -25,6 +27,10 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [errorData, setErrorData] = useState({error:{
+    code:"",
+    message:""
+}});
 
   const changeArea = (name: string) => {
     dispatch({ type: 'FOCUS_AREA', payload: name });
@@ -39,9 +45,10 @@ function App() {
     setIsLoading(true);
     fetch(`https://api.weatherapi.com/v1/forecast.json?q=${areaName}&lang=${lang}&days=${days}&key=${API_KEY}`)
     .then((res) => {
-      setIsError(false);
+      setIsLoading(false);
+      const data= res.json();
       if (res.ok) {
-        const data = res.json();
+        setIsError(false);
         data.then(data=>{
           const locationName = data.location.name;
           dispatch({ type: 'ADD_AREA', payload: locationName });
@@ -51,12 +58,13 @@ function App() {
       }
       else
       {
-        setIsError(true);
+        data.then(data=>{
+          setErrorData(data);
+        });
       }
     })
     .then((responseJson) => {
       setData(responseJson);
-      setIsLoading(false);  
     })
     .catch((error) => {
       setIsError(true);
@@ -97,10 +105,6 @@ function App() {
     if(location) fetchData(location);
   },[location]);
 
-  const performSearch = (e:React.KeyboardEvent<HTMLInputElement>) => {
-    
-  }
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     changeArea(input);
@@ -123,6 +127,12 @@ function App() {
         <Areas/>
       </nav>
       <main>
+        {
+          !isError && isLoading && <Loading/>
+        } 
+        {
+          isError && <ErrorComponent error={errorData}/>
+        }
         {!isLoading && !isError && (
           <div className='main_content'>
               <div className='left_block'>
@@ -135,21 +145,6 @@ function App() {
           </div>
         )}
       </main>
-      {
-        isError && (
-          <div>
-            Помилка!
-            Неправильно введене місто
-          </div>
-        )
-      }
-      {
-        !isError && isLoading && (
-          <div>
-            Обробка запиту...
-          </div>
-        )
-      } 
       <footer>
         <div>
           <a href="https://t.me/magenta_human">

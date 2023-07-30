@@ -55,6 +55,7 @@ nav form div input[type=search] {
 
 main {
     padding: 10px;
+    min-height: 100vh;
 }
 
 @media screen and (min-width: 700px) {
@@ -98,7 +99,6 @@ footer {
     margin-top: 15px;
     background-color: black;
     color: white;
-    min-height: 200px;
     text-align: center;
     padding: 20px;
 }
