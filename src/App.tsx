@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import "./styles/styles.css";
 import { useDispatch, useSelector } from 'react-redux';
 import AppState from './intefaces/AppState';
@@ -23,7 +23,7 @@ function App() {
     location: []
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   const changeArea = (name: string) => {
@@ -45,6 +45,7 @@ function App() {
         data.then(data=>{
           const locationName = data.location.name;
           dispatch({ type: 'ADD_AREA', payload: locationName });
+          dispatch({ type: 'FOCUS_AREA', payload: locationName });
         })
         return data;
       }
@@ -63,31 +64,47 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    
 
-    if (location)
-    {fetchData(location)} 
-    else 
-    {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const string_coords : string = position.coords.latitude.toString().substring(0,5) +" "+ position.coords.longitude.toString().substring(0,5)
-            fetchData(string_coords);
-            dispatch({ type: 'FOCUS_AREA', payload: string_coords });
-          },
-          (error) => {
-            console.error('Error getting user location:', error);
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.permissions.query({name: "geolocation"}).then((result)=>{
+        if(result.state ==="granted" || result.state ==="prompt"){
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const string_coords : string = position.coords.latitude.toString().substring(0,5) +" "+ position.coords.longitude.toString().substring(0,5)
+              fetchData(string_coords);
+            },
+            (error) => {
+              console.error('Error getting user location:', error);
+            }
+         );
+        } else if (result.state ==="denied") {
+          if(location) {
+            fetchData(location);
+          } else {
+            fetchData("Kiev");
           }
-        );
-      } else {
-        console.error('Geolocation is not supported by this browser.');
-        fetchData("Kiev");
-      }
-    };
+        }
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      fetchData("Kiev");
+    }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+  }, []);
+
+  useEffect(()=>{
+    if(location) fetchData(location);
+  },[location]);
+
+  const performSearch = (e:React.KeyboardEvent<HTMLInputElement>) => {
+    
+  }
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    changeArea(input);
+  }
 
   return (
     <>
@@ -95,12 +112,12 @@ function App() {
           Як там внизу <span className='logo'>погодка</span>?
       </header>
       <nav>
-        <form>
+        <form onSubmit={handleSubmit}>
           <span>Введіть назву пункту англійською або його координати:</span>
           <div>
             <img className='location_gif' src={gif} alt="git_location"/>
-            <input type="search" onChange={(e)=>setInput(e.target.value)}/>
-            <input type="button" value="Запит" onClick={() => changeArea(input)} />
+            <input type="search" onChange={(e)=>{setInput(e.target.value)}}/>
+            <input type="submit" value="Запит"/>
           </div>
         </form>
         <Areas/>

@@ -35,7 +35,7 @@ nav form div {
     padding-bottom: 10px;
 }
 
-nav form div input[type=button] {
+nav form div input[type=submit] {
     width: 100px;
     background-color: black;
     color: white;
